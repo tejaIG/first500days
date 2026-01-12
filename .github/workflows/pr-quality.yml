@@ -1,0 +1,38 @@
+# Pull Request Quality Checks
+name: PR Quality
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-check:
+    name: PR Quality Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Check PR title
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          if [[ ! "$PR_TITLE" =~ ^(feat|fix|docs|style|refactor|test|chore):.+ ]]; then
+            echo "❌ PR title must follow conventional commits: type: description"
+            echo "   Valid types: feat, fix, docs, style, refactor, test, chore"
+            exit 1
+          fi
+          echo "✓ PR title follows conventional commits"
+      
+      - name: Check for large files
+        run: |
+          find . -type f -size +5M -not -path "./.git/*" -not -path "./node_modules/*" | while read file; do
+            echo "⚠️  Large file detected: $file"
+          done
+      
+      - name: Check for secrets
+        run: |
+          if grep -r -i "api.key\|secret\|password" --include="*.py" --include="*.ts" --include="*.tsx" --exclude-dir=node_modules .; then
+            echo "⚠️  Potential secrets found in code"
+          fi

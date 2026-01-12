@@ -9,6 +9,7 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+*.env
 
 # Debug logs
 npm-debug.log*
@@ -32,7 +33,17 @@ __pycache__/
 env/
 venv/
 *.so
+.pytest_cache/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Deployment artifacts
+api_deploy.zip
+*.zip
+
+# IDE
+.vscode/
+.idea/
+*.swp

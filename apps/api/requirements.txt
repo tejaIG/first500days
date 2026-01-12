@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+pydantic-settings
+azure-search-documents
+google-generativeai
+pypdf
+python-multipart
+httpx

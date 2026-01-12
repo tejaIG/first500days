@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --accent: #00f3ff;
+  --accent-secondary: #bc13fe;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', sans-serif;
+}
+
+@layer utilities {
+  .neon-border {
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+  }
+  .neon-text {
+    text-shadow: 0 0 8px rgba(0, 243, 255, 0.8);
+  }
+  .cyber-gradient {
+    background: linear-gradient(135deg, #050505 0%, #111 100%);
+  }
+}
